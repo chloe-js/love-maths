@@ -50,8 +50,10 @@ function checkAnswer() {
 
     if (isCorrect) {
         alert("Hey! You got it right! :D");
+        incrementScore();
     } else {
         alert(`Awwww.... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
+        incrementWrongAnswer();
     }
 
     runGame(calculatedAnswer[1]);
@@ -76,13 +78,22 @@ function calculateCorrectAnswer() {
     }
 
 }
+/**
+ * gets the curent score from the DOM and increments it by 1
+ */
+ function incrementScore() { 
 
-function incrementScore() {
-
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
 }
 
-function incrementWrongAnswer() {
-
+/**
+ * GEts the current tally of incorrect answers from the DOM and increments it by 1 
+ */
+ function incrementWrongAnswer() {
+     
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore;
 }
 
 function displayAdditionQuestion(operand1, operand2) {
@@ -210,7 +221,19 @@ function displayMultiplyQuestion() {
 
 // }
 
-// function incrementScore() {
+//
+
+    //innerText & textContent are interchangeable
+    // could have also done oldscore +1 but we wanted to use compund addition of ++oldScore instead
+    // if you put ++ after variable = js get id of school, set inner text of the oldScool variabhle and then add 1 to old score = nevver see score being UPDATED because written back to the DOM before having one added to it
+    // if it ois ++ BEFORE = JS get the id of school then set the innertest to one + oldScore = SEE score being UPDATED
+    // to get incorrect andswer from dom
+/**
+ * gets the curent score from the DOM and increments it by 1
+ */
+// // function incrementScore() { 
+//     let oldScore = parseInt(document.getElementByID("scroe").innerText);
+//     document.getElementById("score").innerText = ++oldScore;
 
 // }
 
