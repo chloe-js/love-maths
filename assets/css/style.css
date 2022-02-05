@@ -1,7 +1,7 @@
 /* --------- Global style */
 
 body {
-    background-color: white;
+    background-color: pink;
     font-family: "Raleway", sans-serif;
     color: #445361;
     text-align: center;
@@ -233,7 +233,7 @@ body {
 }
 
 @media (max-width: 320px) {
-    .game-area {3
+    .game-area {
         height: 70vh;
     }
 
@@ -248,4 +248,5 @@ body {
     .question-area {
         padding: 10px 0;
     }
+
 }
