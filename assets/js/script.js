@@ -15,15 +15,25 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    });
+
     runGame("addition");
 
 });
 
+
+// setting the focus is having your curser already in the selection answer box. each time the awnser box is called the cursor will be there for the answer
 /**
  * The main game "loop", called when the script is first loaded
  * and after the user's answer has been processed
  */
 function runGame(gameType) {
+    document.getElementById("answer-box").value = "";
+    document.getElementById("answer-box").focus();
 
     // Creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
@@ -33,7 +43,13 @@ function runGame(gameType) {
         displayAdditionQuestion(num1, num2);
     } else if (gameType === "multiply") {
         displayMultiplyQuestion(num1, num2);
-    } else {
+    } else if (gameType === "subtract") {
+        displaySubtractQuestion(num1, num2);
+    }
+    //   else if (gameType === "divide") {
+    //     displayDivideQuestion(num1, num2);
+    // }  
+    else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting!`;
     }
@@ -76,7 +92,14 @@ function calculateCorrectAnswer() {
         return [operand1 + operand2, "addition"];
     } else if (operator === "x") {
         return [operand1 * operand2, "multiply"];
-    } else {
+    } else if (operator === "-") {
+        return [operand1 - operand2, "subtract"];
+    } 
+    // else if (operator === "/") {
+    //     return [operand1 / operand2, "divide"];
+    // } 
+    
+    else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
     }
@@ -111,7 +134,13 @@ function displayAdditionQuestion(operand1, operand2) {
     
 }
 
-function displaySubtractQuestion() {
+// need to keep the operand 1 as the larger number to keep from neg number ( could use if statement but ternary operator is shorter )
+
+function displaySubtractQuestion(operand1, operand2) {
+
+    document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand2').textContent = operand2 > operand2 ? operand1 : operand2;
+    document.getElementById('operator').textContent = "-";
 
 }
 
@@ -123,14 +152,23 @@ function displayMultiplyQuestion(operand1, operand2) {
 
 }
 
+// function displayDivisionQuestion(operand1, operand2) {
+
+//     document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
+//     document.getElementById('operand2').textContent = operand2 > operand2 ? operand1 : operand2;
+//     document.getElementById('operator').textContent = "/";
+
+// }
 
 
 // //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxNOTESxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 /**
 3 things nneded to add to make run game function  
-1 - needs to have new game type added 
-2 - create display question function
-3- updare calculate correct answer function
+1 -(add gameType check runGame()) needs to have new game type added 
+2 - (create the display question function)create display question function
+3- (modify the calculate correct answer function) updare calculate correct answer function
+division, the first number needs to be higher than the second one
+always want awnser to be a whole number - integer (cant be 10/3 = 3.333) = multiply 2 operands together to form one side of the equation
 
 multiplication game = data-typpe = multiply 
 then go to 
@@ -142,19 +180,30 @@ then go to
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "x";
 }
-function calculateCorrect (){
+3) function calculateCorrect (){
     else if (operand1 === "x"){
         return[operand1 * operand2, "multiply"]
     }
 }
+
+git add .
+gitpod /workspace/love-maths (main) $ git commit -m 'add multiplication game code'
  */
 
+// you dont need to delete the awnser before starting a new game.
+// set value of empty string so each time our run game function is called it will set the value of answer box to empty string and empty it
+// // setting the focus is having your curser already in the selection answer box. each time the awnser box is called the cursor will be there for the answer
+// function runGame(gameType){
+//     document.getElementById("answer-box").value = "";
+    // document.getElementById("answer-box").focus();
+// }
 
 // // Wait for the DOM to finish loading before running the game
 // // Get the button elements and add event listeners to them
 // //code that the event listener exicutes is called and event HANDELER
 // //try to avoid storeing variables globaly, pass values between functions, but dont pollute globale namespace. 
 // //AVOID WRITING GLOBAL VARIABLES incase other scripts are loaded onto page
+
 
 // document.addEventListener("DOMContentLoaded", function() {
 //     // always best to wait for DOM to finish loading before you start running your code
@@ -181,6 +230,15 @@ function calculateCorrect (){
 //             }
 //         });
 //     }
+// want answer to be submitted when press answer.
+// listening for key down . the call funtion this time we are going to send in an event object, the check the KEY PROPERTY  of the event object
+// to see if the enter key was pressed. slightly different than before. listening for key down event. 
+// that event then generates an object which we then pass through even handeler code. this case the the KEY PROPERTY
+// when pressed ENTER then run this function ==== KEY BOARD CONTROLLED
+// document.getElementById("awnser-box").addEventListener("keydown", fuction(event){
+//      if (event.key === "Enter") {
+//    checkAnswer();}
+// })
 
 //     runGame("addition");
 //     // we want the addition game to start as soon as page is loaded. add it to the event listener = default game
@@ -193,6 +251,11 @@ function calculateCorrect (){
 //  * and afer the user's answer has been processed
 // */
 // function runGame(gameType) {
+     // setting the focus is having your curser already in the selection answer box. each time the awnser box is called the cursor will be there for the answer
+// function runGame(gameType){
+//     document.getElementById("answer-box").value = "";
+    // document.getElementById("answer-box").focus();
+// }
 //     //runGame() did not have any parameters to the function in order for it to acsept = gameType
 //     // tested math in console of Inspect! we want whole number (floor round off) between 1-25. floor would include 0. +1 makes sure never include 0
 //     // Creates two random numbers betwen 1 and 25
@@ -284,6 +347,13 @@ function calculateCorrect (){
 //     document.getElementById('operator').textContent = "+";
 
 // }
+
+//dont want answers to be a negative number  ==== change in display question function
+// the game generate 2 random numbers and the second one can sometimes be larger than the first this would result in a neg number
+// other than that everything is exactly the same as the multiplication game!
+//
+
+//// need to keep the operand 1 as the larger number to keep from neg number ( could use if statement but ternary operator is shorter )
 
 // function displaySubtractQuestion() {
 
