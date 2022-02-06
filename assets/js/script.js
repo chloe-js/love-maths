@@ -146,7 +146,8 @@ function displayMultiplyQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = "x";
 
 }
-
+// always want awnser to be a whole number - integer (cant be 10/3 = 3.333) = multiply 2 operands together to form one side of the equation
+// TERNARY OPERATOR = question checking goes before ? is operand 1 bigger than op 2? if so return operand 1 if not (else) : return operand 2
 function displayDivisionQuestion(operand1, operand2) {
 
     document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
