@@ -46,7 +46,7 @@ function runGame(gameType) {
     } else if (gameType === "subtract") {
         displaySubtractQuestion(num1, num2);
     }  else if (gameType === "division") {
-        displayDivisionQuestion(num1, num2);
+        displayDivisionQuestion(num1 * num2, num2);
     }  else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting!`;
